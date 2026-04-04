@@ -1,28 +1,40 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
-import numpy as np
 
-# Load pipeline
+# Load the retrained pipeline
 pipeline = joblib.load("DiabetesPipeline.joblib")
+
+app = FastAPI()
 
 # Define input schema
 class Patient(BaseModel):
-    glucose: float
-    blood_pressure: float
+    age: str
+    gender: str
+    family_history: str
+    blood_pressure: str
+    activity: str
     bmi: float
-    age: int
+    glucose: float
 
-# Create FastAPI app
-app = FastAPI()
-
-@app.post("/predict")
-def predict(patient: Patient):
-    data = np.array([[patient.glucose, patient.blood_pressure, patient.bmi, patient.age]])
-    prediction = pipeline.predict(data)[0]
-    probability = pipeline.predict_proba(data)[0][prediction]
-    return {"prediction": int(prediction), "probability": round(float(probability), 2)}
+# Helper: convert inputs into numeric format for the model
+def encode_inputs(patient: Patient):
+    return [[
+        int(patient.age.split("-")[0]) if "-" in patient.age else 65,  # convert age range to number
+        1 if patient.gender == "Male" else 0,
+        1 if patient.family_history == "Yes" else 0,
+        1 if patient.blood_pressure == "Yes" else 0,
+        1 if patient.activity == "Yes" else 0,
+        patient.bmi,
+        patient.glucose
+    ]]
 
 @app.get("/")
 def root():
     return {"message": "API is running"}
+
+@app.post("/predict")
+def predict(patient: Patient):
+    data = encode_inputs(patient)
+    prediction = pipeline.predict(data)[0]
+    return {"diabetes_risk": int(prediction)}
