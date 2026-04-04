@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
+import pandas as pd
 
 # Load the retrained pipeline
 pipeline = joblib.load("DiabetesPipeline.joblib")
+print("Pipeline expects:", pipeline.n_features_in_)  # Debug check
 
 app = FastAPI()
 
@@ -17,17 +19,19 @@ class Patient(BaseModel):
     bmi: float
     glucose: float
 
-# Helper: convert inputs into numeric format for the model
+# Convert inputs into DataFrame with correct column names
 def encode_inputs(patient: Patient):
-    return [[
-        int(patient.age.split("-")[0]) if "-" in patient.age else 65,  # convert age range to number
-        1 if patient.gender == "Male" else 0,
-        1 if patient.family_history == "Yes" else 0,
-        1 if patient.blood_pressure == "Yes" else 0,
-        1 if patient.activity == "Yes" else 0,
-        patient.bmi,
-        patient.glucose
-    ]]
+    data = pd.DataFrame([{
+        "Age": int(patient.age.split("-")[0]) if "-" in patient.age else 65,
+        "Gender": patient.gender,              # keep as string
+        "FamilyHistory": patient.family_history,  # keep as string
+        "BloodPressure": patient.blood_pressure,  # keep as string
+        "Activity": patient.activity,          # keep as string
+        "BMI": patient.bmi,
+        "Glucose": patient.glucose
+    }])
+    print("DataFrame sent to pipeline:\n", data)
+    return data
 
 @app.get("/")
 def root():
@@ -35,6 +39,10 @@ def root():
 
 @app.post("/predict")
 def predict(patient: Patient):
-    data = encode_inputs(patient)
-    prediction = pipeline.predict(data)[0]
-    return {"diabetes_risk": int(prediction)}
+    try:
+        data = encode_inputs(patient)
+        prediction = pipeline.predict(data)[0]
+        return {"diabetes_risk": int(prediction)}
+    except Exception as e:
+        print("Error during prediction:", e)
+        return {"error": str(e)}
