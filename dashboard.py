@@ -1,31 +1,14 @@
+import requests
 import streamlit as st
-import pandas as pd
-import joblib
-import numpy as np
 
-# Load dataset sample
-url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
-column_names = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness',
-                'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
-df = pd.read_csv(url, header=None, names=column_names)
+st.title("Diabetes Risk Checker")
 
-# Load pipeline
-pipeline = joblib.load("DiabetesPipeline.joblib")
+# Collect user input
+age = st.number_input("Age", 18, 100)
+glucose = st.number_input("Glucose Level", 0, 300)
+bmi = st.number_input("BMI", 0.0, 60.0)
 
-st.title("Diabetes Prediction Dashboard")
-
-st.subheader("Dataset Sample")
-st.dataframe(df.head())
-
-st.subheader("Patient Input")
-glucose = st.slider("Glucose", 0, 200, 120)
-blood_pressure = st.slider("Blood Pressure", 0, 122, 70)
-bmi = st.slider("BMI", 0, 67, 25)
-age = st.slider("Age", 21, 100, 30)
-
-if st.button("Predict"):
-    data = np.array([[glucose, blood_pressure, bmi, age]])
-    prediction = pipeline.predict(data)[0]
-    probability = pipeline.predict_proba(data)[0][prediction]
-    st.write("Prediction:", "Diabetic" if prediction == 1 else "Not Diabetic")
-    st.write("Probability:", round(float(probability), 2))
+if st.button("Check Risk"):
+    patient = {"age": age, "glucose": glucose, "bmi": bmi}
+    response = requests.post("http://localhost:8000/predict", json=patient)
+    st.write("Result:", response.json())
