@@ -2,17 +2,13 @@
 
 A complete diabetes risk assessment project built to demonstrate practical skills in machine learning, API development, interactive visualization, deployment, and automation. This repository is designed for recruiters reviewing internship candidates in cloud services, product operations, data analytics, or AI engineering.
 
-## Overview
+## Live Demo
 
-This project includes a full end-to-end workflow:
-- data processing and model training with `scikit-learn`
-- REST API deployment using `FastAPI`
-- interactive web dashboard using `Streamlit`
-- desktop prototype using `Tkinter`
-- containerization with `Docker`
-- sync and automation support for Hugging Face Spaces integration
+Try the diabetes risk assessment dashboard online (no installation required):
 
-The repository is designed to be clean, professional, and easy to run locally.
+**[🔗 Live Streamlit Dashboard](https://vionnagau-diabetes-project-new.hf.space)**
+
+> This interactive web application allows you to input health metrics and get instant diabetes risk predictions.
 
 ## Technology Stack
 
