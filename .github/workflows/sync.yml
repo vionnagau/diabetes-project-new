@@ -36,3 +36,28 @@ jobs:
           GIT_TERMINAL_PROMPT: 0
         run: |
           git push --force hf HEAD:main
+
+      - name: Install Python upload dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install huggingface-hub hf-xet
+
+      - name: Upload model file to HF Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+
+          repo_id = "vionnagau/diabetes-project-new"
+          api = HfApi()
+          api.upload_file(
+              path_or_fileobj="DiabetesPipeline.joblib",
+              path_in_repo="DiabetesPipeline.joblib",
+              repo_id=repo_id,
+              repo_type="space",
+              token=os.environ["HF_TOKEN"]
+          )
+          print("✔ DiabetesPipeline.joblib uploaded successfully.")
+          PY
