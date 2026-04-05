@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set remote
-        run: git remote add hf https://vionnagau:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/vionnagau/diabetes-project-new.git
+        run: git remote add hf https://vionnagau:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/vionnagau/diabetes-project-new
 
       - name: Push to HF
         run: git push --force hf main
