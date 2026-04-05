@@ -3,6 +3,7 @@ name: Sync to Hugging Face
 on:
   push:
     branches: [main]
+  workflow_dispatch: {}
 
 jobs:
   sync:
@@ -18,7 +19,12 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       - name: Add Hugging Face remote
-        run: git remote add hf https://vionnagau:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/vionnagau/diabetes-project-new
+        run: |
+          git remote remove hf 2>/dev/null || true
+          git remote add hf "https://x-access-token:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/vionnagau/diabetes-project-new.git"
 
       - name: Push to Hugging Face
-        run: git push --force hf main
+        env:
+          GIT_TERMINAL_PROMPT: 0
+        run: |
+          git push --force hf HEAD:main
