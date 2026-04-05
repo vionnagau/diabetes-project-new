@@ -9,142 +9,153 @@ app_file: app.py
 pinned: false
 ---
 
-# Diabetes Risk Assessment System
+# 🩺 Diabetes Risk Assessment System
 
-A complete diabetes risk assessment project built to demonstrate practical skills in machine learning, API development, interactive visualization, deployment, and automation. This repository is designed for recruiters reviewing internship candidates in cloud services, product operations, data analytics, or AI engineering.
+A production-ready diabetes risk assessment platform combining machine learning, REST APIs, interactive dashboards, and cloud deployment. This project showcases a complete ML engineering workflow from data pipeline to public deployment.
 
-## Live Demo
+---
 
-Try the diabetes risk assessment dashboard online (no installation required):
+## 🚀 Live Demo
 
-**[🔗 Live Streamlit Dashboard](https://huggingface.co/spaces/vionnagau/diabetes-project-new)**
+**Try it now** – No installation required:
 
-> This interactive web application allows you to input health metrics and get instant diabetes risk predictions.
+### **[→ Launch Streamlit Dashboard](https://huggingface.co/spaces/vionnagau/diabetes-project-new)**
 
-## Technology Stack
+Input your health metrics and receive instant diabetes risk predictions powered by a trained scikit-learn Random Forest model.
+
+---
+
+## 🛠️ Technology Stack
 
 | Category | Technologies |
 |---|---|
-| Programming Languages | Python 3.11+, Shell/Bash |
-| ML & Data | scikit-learn, pandas, NumPy, joblib |
-| Backend | FastAPI, Uvicorn |
-| Frontend / UI | Streamlit, Tkinter |
-| Deployment | Docker, GitHub Actions, Hugging Face Spaces |
-| Versioning/Automation | Git, GitHub Actions, Git LFS, shell scripts |
-| Documentation | Markdown, model card, integration guide |
+| **Languages** | Python 3.12, Shell/Bash |
+| **ML & Data** | scikit-learn, pandas, NumPy, joblib |
+| **Backend** | FastAPI, Uvicorn |
+| **Frontend** | Streamlit, Tkinter |
+| **Deployment** | Docker, GitHub Actions, Hugging Face Spaces |
+| **DevOps** | Git, Git LFS, GitHub Actions |
 
-## Repo Structure
+---
+
+## 📁 Project Structure
 
 ```
 diabetes-project-new/
+├── app/
+│   └── api.py                   # FastAPI endpoints
+├── tests/                       # Test suite
 ├── .github/
 │   └── workflows/
-│       └── sync.yml                 # Hugging Face sync workflow
-├── .gitattributes                   # LFS configuration
-├── .gitignore                       # ignored files
-├── Dockerfile                       # container setup for API
-├── HF_INTEGRATION_GUIDE.md          # Hugging Face deployment guide
-├── HF_MODEL_CARD.md                 # model card documentation
-├── README.md                        # this file
-├── app/api.py                       # FastAPI endpoint implementation
-├── dashboard.py                     # Streamlit dashboard app
-├── diabetes_app.py                  # Tkinter desktop application
-├── train_model.py                   # model training pipeline
-├── DiabetesPipeline.joblib          # trained serialized model
-├── Diabetesmodel.pkl                # alternative model file
-├── push_to_hub.py                   # Hugging Face upload helper script
-├── requirements.txt                 # Python dependencies
-├── sync_to_hf.sh                    # local sync helper script
-└── tests/                           # test and validation code
+│       └── sync.yml             # Hugging Face sync workflow
+├── Dockerfile                   # Container configuration
+├── app.py                       # Streamlit web app
+├── dashboard.py                 # Dashboard interface
+├── diabetes_app.py              # Desktop UI (Tkinter)
+├── train_model.py               # ML pipeline & training
+├── DiabetesPipeline.joblib      # Trained model
+├── requirements.txt             # Dependencies
+├── sync_to_hf.sh                # HF sync script
+└── README.md                    # Documentation
 ```
 
-## Key Features
+---
 
-- **Machine Learning Pipeline**: Builds and saves a predictive model for diabetes risk using data preprocessing and a Random Forest classifier.
-- **REST API**: Provides prediction endpoints through FastAPI for integration with other applications.
-- **Interactive Dashboard**: Streamlit interface for user input, visualization, and immediate prediction feedback.
-- **Desktop UI Prototype**: Tkinter-based application for local user interaction.
-- **Deployment Ready**: Dockerfile and automation scripts support reproducible deployment.
-- **Hugging Face Sync**: Workflow and scripts manage synchronization with Hugging Face Spaces without exposing secrets.
+## ✨ Features
 
-## Skills Demonstrated
+- 🤖 **ML Pipeline**: Random Forest classifier with preprocessing (imputation, scaling, encoding)
+- 🔌 **REST API**: FastAPI endpoints for programmatic predictions
+- 📊 **Web Dashboard**: Interactive Streamlit interface with real-time predictions
+- 🖥️ **Desktop App**: Tkinter-based local UI alternative
+- 🐳 **Containerized**: Docker support for consistent deployment
+- ☁️ **Cloud Ready**: Automated Hugging Face Spaces sync with GitHub Actions
 
-This project showcases practical skills in:
+---
 
-- **Machine Learning**: data preprocessing, model training, and evaluation using scikit-learn
-- **API Development**: building REST endpoints with FastAPI for programmatic access
-- **Interactive UI**: creating user-friendly dashboards with Streamlit
-- **Desktop Applications**: developing local GUI prototypes with Tkinter
-- **Deployment & Automation**: containerization with Docker and workflow automation with GitHub Actions
-- **Version Control & Collaboration**: Git workflows, branching strategies, and remote repository management
-- **Documentation**: writing clear technical documentation and model cards
+## 💡 Technical Highlights
 
-## Installation
+- **ML Engineering**: Data preprocessing, model training, and hyperparameter tuning with scikit-learn
+- **Backend Development**: RESTful API design with FastAPI and async Python
+- **Frontend**: Interactive UIs with Streamlit and Tkinter
+- **DevOps**: Docker containerization, GitHub Actions CI/CD, Git LFS for large files
+- **Cloud Deployment**: Automated sync to Hugging Face Spaces with secure token handling
+- **Reproducibility**: Version pinning and environment isolation for consistent builds
 
-Use the GitHub clone URL below to get the repository locally. This is the correct URL for the repository and is safe for recruiters and collaborators:
+---
+
+## 📦 Installation
+
+**Clone the repository:**
 
 ```bash
 git clone https://github.com/vionnagau/diabetes-project-new.git
 cd diabetes-project-new
 ```
 
-Create a Python virtual environment and install dependencies:
+**Set up environment:**
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-> Note: The `README` URL uses `diabetes-project-new`, which matches the actual GitHub repository name. The `.git` suffix is standard for clone URLs and is correct.
-
-## Local Usage
-
-### Run the Streamlit dashboard
+**Verify setup:**
 
 ```bash
-streamlit run dashboard.py
+python3 -c "import joblib; print('✓ Environment ready')"
 ```
 
-### Run the FastAPI backend
+---
 
+## 🎯 Quick Start
+
+**Web Dashboard** (Recommended)
+```bash
+streamlit run app.py
+# Opens at http://localhost:8501
+```
+
+**REST API**
 ```bash
 uvicorn app.api:app --reload --port 8000
+# API docs at http://localhost:8000/docs
 ```
 
-### Run the desktop UI
-
+**Desktop Application**
 ```bash
-python diabetes_app.py
+python3 diabetes_app.py
 ```
 
-### Run tests
-
+**Tests**
 ```bash
 pytest tests/ -v
 ```
 
-## Deployment and Sync
+---
 
-Recruiters do not need any token or secret to run the project locally. The following deployment commands are only required for project maintenance and Hugging Face sync by the repository owner.
+## 🚀 Deployment
 
-### Hugging Face sync (optional, maintainer only)
+### Local Deployment
+No external setup required. Clone, install, and run with the Quick Start commands above.
 
-This project includes a helper script and workflow to sync the repository with Hugging Face Spaces. If you maintain the project, use an environment variable for the token:
+### Cloud Deployment (Hugging Face Spaces)
+The web app is automatically deployed to Hugging Face Spaces via GitHub Actions. Monitor syncs in the Actions tab.
 
+**For maintainers:** Trigger manual sync with:
 ```bash
 export HF_TOKEN="your_hf_write_token"
 bash sync_to_hf.sh
 ```
 
-> This token command is optional and only for deployment automation. It is not required for running the app locally.
+> ⚠️ **Security Note:** Never commit tokens. Use environment variables only.
 
-## For Public Users
+---
 
-- No secret or token is required for cloning or running the project.
-- The main local commands are `streamlit run dashboard.py`, `uvicorn app.api:app --reload --port 8000`, and `python diabetes_app.py`.
-- This repository is intentionally structured to be easy to understand, maintain, and extend.
+## 📧 Questions?
 
-## Contact
+Open an issue or reach out with questions about the implementation, architecture, or deployment approach.
 
-If you want to discuss this project or the skills demonstrated, I am happy to explain the technical architecture, data decisions, and deployment choices.
+---
+
+**Built with ❤️ using Python, scikit-learn, and modern ML engineering practices.**
