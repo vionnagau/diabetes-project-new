@@ -12,4 +12,4 @@ jobs:
       - name: Push to HF
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://vionnagau:$HF_TOKEN@huggingface.co/spaces/vionnagau/diabetes-project-new main
+        run: git push --force https://vionnagau:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/vionnagau/diabetes-project-new main
