@@ -60,14 +60,17 @@ diabetes-project-new/
 - **Deployment Ready**: Dockerfile and automation scripts support reproducible deployment.
 - **Hugging Face Sync**: Workflow and scripts manage synchronization with Hugging Face Spaces without exposing secrets.
 
-## Why This Project Is Relevant
+## Skills Demonstrated
 
-This project is designed to highlight skills that are directly valuable for internship roles in cloud services, product operations, and data-driven teams:
+This project showcases practical skills in:
 
-- **Cloud-ready delivery**: containerization and sync workflows demonstrate deployment maturity.
-- **Data and analytics orientation**: model training and dashboard work show practical data experience.
-- **Automation mindset**: GitHub Actions and shell scripts highlight process automation skills.
-- **Product-aware engineering**: multiple interfaces (API, dashboard, desktop app) show user-focused implementation.
+- **Machine Learning**: data preprocessing, model training, and evaluation using scikit-learn
+- **API Development**: building REST endpoints with FastAPI for programmatic access
+- **Interactive UI**: creating user-friendly dashboards with Streamlit
+- **Desktop Applications**: developing local GUI prototypes with Tkinter
+- **Deployment & Automation**: containerization with Docker and workflow automation with GitHub Actions
+- **Version Control & Collaboration**: Git workflows, branching strategies, and remote repository management
+- **Documentation**: writing clear technical documentation and model cards
 
 ## Installation
 
@@ -129,7 +132,7 @@ bash sync_to_hf.sh
 
 > This token command is optional and only for deployment automation. It is not required for running the app locally.
 
-## Notes for Recruiters
+## For Public Users
 
 - No secret or token is required for cloning or running the project.
 - The main local commands are `streamlit run dashboard.py`, `uvicorn app.api:app --reload --port 8000`, and `python diabetes_app.py`.
