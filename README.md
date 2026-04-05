@@ -6,7 +6,7 @@ A complete diabetes risk assessment project built to demonstrate practical skill
 
 Try the diabetes risk assessment dashboard online (no installation required):
 
-**[🔗 Live Streamlit Dashboard](https://vionnagau-diabetes-project-new.hf.space)**
+**[🔗 Live Streamlit Dashboard](https://huggingface.co/spaces/vionnagau/diabetes-project-new)**
 
 > This interactive web application allows you to input health metrics and get instant diabetes risk predictions.
 
