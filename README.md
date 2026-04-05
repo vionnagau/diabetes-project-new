@@ -1,3 +1,14 @@
+---
+title: Diabetes Risk Assessment System
+emoji: "🩺"
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+python_version: "3.12"
+app_file: app.py
+pinned: false
+---
+
 # Diabetes Risk Assessment System
 
 A complete diabetes risk assessment project built to demonstrate practical skills in machine learning, API development, interactive visualization, deployment, and automation. This repository is designed for recruiters reviewing internship candidates in cloud services, product operations, data analytics, or AI engineering.
