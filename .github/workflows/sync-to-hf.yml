@@ -12,12 +12,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-
-      - name: Add Hugging Face remote
+      - name: Set Hugging Face remote
         run: git remote add hf https://vionnagau:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/vionnagau/diabetes-project-new
 
       - name: Push to Hugging Face
