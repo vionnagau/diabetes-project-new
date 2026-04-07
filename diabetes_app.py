@@ -1,12 +1,14 @@
 import numpy as np
-import joblib
 import streamlit as st
+from huggingface_hub import hf_hub_download
+import joblib
 
-# Load the trained model
 try:
-    model = joblib.load("Diabetesmodel.pkl")
-except FileNotFoundError:
-    st.error("Model file 'Diabetesmodel.pkl' not found. Please ensure it's in the same directory.")
+    # Download the model file from your Hugging Face model repo
+    model_path = hf_hub_download(repo_id="vionnagau/diabetes-model", filename="Diabetesmodel.pkl")
+    model = joblib.load(model_path)
+except Exception as e:
+    st.error(f"Model could not be loaded: {e}")
     st.stop()
 
 # Function to predict
