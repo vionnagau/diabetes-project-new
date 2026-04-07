@@ -51,9 +51,12 @@ if st.button("Assess Risk"):
 
     # Display result
     if prediction >= 0.5:
-        st.error(f"⚠️ High Risk: Probability {prediction*100:.1f}%")
+        st.error("⚠️ High Risk: Based on the provided metrics, there may be an elevated risk of diabetes.")
+        st.write(f"**Risk Probability:** {prediction*100:.1f}%")
     else:
-        st.success(f"✅ Low Risk: Probability {prediction*100:.1f}%")
+        st.success("✅ Low Risk: Based on the provided metrics, diabetes risk appears to be lower.")
+        st.write(f"**Risk Probability:** {prediction*100:.1f}%")
 
     # Disclaimer
     st.info("Important: This assessment is not a medical diagnosis. Please consult healthcare professionals for proper evaluation.")
+
