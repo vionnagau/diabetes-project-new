@@ -2,13 +2,14 @@ import tkinter as tk
 from tkinter import messagebox
 import numpy as np
 import pickle
+import streamlit as st
 
 # Load the trained model
 try:
     with open('Diabetesmodel.pkl', 'rb') as file:
         model = pickle.load(file)
 except FileNotFoundError:
-    messagebox.showerror("File Error", "Model file 'Diabetesmodel.pkl' not found. Please ensure it's in the same directory.")
+    st.error("Model file 'Diabetesmodel.pkl' not found. Please ensure it's in the same directory.")
     raise SystemExit
 
 # Function to predict
