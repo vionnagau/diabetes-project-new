@@ -53,14 +53,19 @@ if st.button("Assess Risk"):
 
     # Predict probability
     prediction = model.predict_proba(input_df)[0][1]
+    prob_percent = prediction * 100
 
-    # Display result
+    # Display result with spacing and hierarchy
+    st.markdown("---")  # separator line for clarity
+
     if prediction >= 0.5:
         st.error("⚠️ High Risk: Based on the provided metrics, there may be an elevated risk of diabetes.")
-        st.markdown(f"### **Risk Probability: {prediction*100:.1f}%**")
     else:
         st.success("✅ Low Risk: Based on the provided metrics, diabetes risk appears to be lower.")
-        st.markdown(f"### **Risk Probability: {prediction*100:.1f}%**")
+
+    st.markdown("<br>", unsafe_allow_html=True)  # add spacing
+    st.markdown("**Risk Probability:**")         # smaller label
+    st.markdown(f"<h2 style='margin-top:0;'> {prob_percent:.1f}% </h2>", unsafe_allow_html=True)  # big bold percentage
 
     # Disclaimer
     st.info("Important: This assessment is not a medical diagnosis. Please consult healthcare professionals for proper evaluation.")
