@@ -16,14 +16,19 @@ except Exception as e:
 
 st.title("🩺 Diabetes Risk Assessment")
 
-# Inputs
-age_range = st.selectbox("Age Range", ["20-29","30-39","40-49","50-59","60-69","70+"])
-gender = st.radio("Gender", ["Male","Female"])
-family_history = st.radio("Family History of Diabetes?", ["Yes","No"])
-high_bp = st.radio("High Blood Pressure?", ["Yes","No"])
-physically_active = st.radio("Physically Active?", ["Yes","No"])
-bmi = st.number_input("BMI (kg/m²)", min_value=10.0, max_value=60.0, step=0.1)
-glucose = st.number_input("Glucose Level (mg/dL)", min_value=20.0, max_value=200.0, step=0.1)
+# Two-column input layout
+col1, col2 = st.columns(2)
+
+with col1:
+    age_range = st.selectbox("Age Range", ["20-29","30-39","40-49","50-59","60-69","70+"])
+    gender = st.radio("Gender", ["Male","Female"])
+    high_bp = st.radio("High Blood Pressure?", ["Yes","No"])
+    bmi = st.number_input("BMI (kg/m²)", min_value=10.0, max_value=60.0, step=0.1)
+
+with col2:
+    physically_active = st.radio("Physically Active?", ["Yes","No"])
+    family_history = st.radio("Family History of Diabetes?", ["Yes","No"])
+    glucose = st.number_input("Glucose Level (mg/dL)", min_value=20.0, max_value=200.0, step=0.1)
 
 # Predict button
 if st.button("Assess Risk"):
@@ -52,11 +57,13 @@ if st.button("Assess Risk"):
     # Display result
     if prediction >= 0.5:
         st.error("⚠️ High Risk: Based on the provided metrics, there may be an elevated risk of diabetes.")
-        st.write(f"**Risk Probability:** {prediction*100:.1f}%")
+        st.markdown(f"### **Risk Probability: {prediction*100:.1f}%**")
     else:
         st.success("✅ Low Risk: Based on the provided metrics, diabetes risk appears to be lower.")
-        st.write(f"**Risk Probability:** {prediction*100:.1f}%")
+        st.markdown(f"### **Risk Probability: {prediction*100:.1f}%**")
 
     # Disclaimer
     st.info("Important: This assessment is not a medical diagnosis. Please consult healthcare professionals for proper evaluation.")
 
+# Professional footer
+st.caption("Built with Streamlit and scikit-learn | Model trained on Pima Indians Diabetes dataset")
