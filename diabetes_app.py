@@ -64,15 +64,15 @@ if st.button("Assess Risk"):
     else:
         st.success("✅ Low Risk: Based on the provided metrics, diabetes risk appears to be lower.")
 
-    # Add spacing before probability
-    st.markdown("<br>", unsafe_allow_html=True)
+    # Add vertical spacing
+    st.markdown("<div style='margin-top:20px;'></div>", unsafe_allow_html=True)
 
     # Smaller label above
     st.markdown("**Risk Probability:**")
 
     # Larger bold percentage below
     st.markdown(
-        f"<h1 style='margin-top:0; font-size: 48px;'> {prob_percent:.1f}% </h1>",
+        f"<div style='font-size:48px; font-weight:bold; margin-top:5px;'> {prob_percent:.1f}% </div>",
         unsafe_allow_html=True
     )
 
