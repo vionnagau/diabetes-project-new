@@ -1,16 +1,13 @@
-import tkinter as tk
-from tkinter import messagebox
 import numpy as np
-import pickle
+import joblib
 import streamlit as st
 
 # Load the trained model
 try:
-    with open('Diabetesmodel.pkl', 'rb') as file:
-        model = pickle.load(file)
+    model = joblib.load("Diabetesmodel.pkl")
 except FileNotFoundError:
     st.error("Model file 'Diabetesmodel.pkl' not found. Please ensure it's in the same directory.")
-    raise SystemExit
+    st.stop()
 
 # Function to predict
 def predict():
@@ -37,9 +34,9 @@ def predict():
             result_label.config(text="✅ You are not likely to have diabetes.", fg="#2ecc71") # Green for no risk
 
     except ValueError:
-        messagebox.showerror("Invalid Input", "Please enter valid numbers:\n- Glucose, Blood Pressure, BMI: decimals (e.g., 12.5)\n- Age: whole number (e.g., 30)")
+        st.error("Invalid Input", "Please enter valid numbers:\n- Glucose, Blood Pressure, BMI: decimals (e.g., 12.5)\n- Age: whole number (e.g., 30)")
     except Exception as e:
-        messagebox.showerror("Prediction Error", f"An unexpected error occurred during prediction: {e}")
+        st.error("Prediction Error", f"An unexpected error occurred during prediction: {e}")
 
 # GUI setup
 root = tk.Tk()
