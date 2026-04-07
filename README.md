@@ -1,4 +1,14 @@
-
+---
+title: Diabetes Project
+emoji: 🩺
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.32.0"
+python_version: "3.10"
+app_file: diabetes_app.py
+pinned: false
+---
 
 # 🩺 Diabetes Risk Assessment System
 
