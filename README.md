@@ -197,6 +197,5 @@ Open an issue or reach out if you have questions about the implementation, archi
 ---
 
 **Built with Python, scikit-learn, and modern ML deployment practices.**
-```
 
 ---
