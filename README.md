@@ -1,3 +1,4 @@
+
 ---
 title: Diabetes Project
 emoji: 🩺
@@ -30,10 +31,10 @@ A browser-based interface for entering health metrics and receiving an immediate
 
 | Category | Technologies |
 |---|---|
-| **Language** | Python 3.12 |
+| **Language** | Python 3.10 |
 | **ML & Data** | scikit-learn, pandas, NumPy, joblib |
 | **API** | FastAPI, Uvicorn |
-| **UI** | Streamlit, Tkinter |
+| **UI** | Streamlit |
 | **Deployment** | Docker, GitHub Actions, Hugging Face Spaces |
 | **DevOps** | Git, Git LFS |
 
@@ -46,31 +47,41 @@ This project includes:
 - **Model training pipeline** with feature engineering and a Random Forest classifier
 - **API service** that loads a serialized model and exposes prediction endpoints
 - **Streamlit dashboard** for end-user interaction and visual feedback
-- **Tkinter desktop prototype** for local application testing
 - **Deployment automation** via scripts and GitHub Actions
 
 ---
 
-## 📁 Repository Layout
+## 📁 Repository Layout (latest)
 
 ```text
 diabetes-project-new/
-├── app/
-│   └── api.py                   # FastAPI endpoints and model inference
-├── tests/                       # Validation and regression tests
 ├── .github/
 │   └── workflows/
-│       └── sync.yml             # Hugging Face sync workflow
-├── Dockerfile                   # Container build instructions
-├── app.py                       # Streamlit web application
-├── dashboard.py                 # Alternative dashboard interface
-├── diabetes_app.py              # Tkinter desktop UI
-├── train_model.py               # ML pipeline and training script
-├── DiabetesPipeline.joblib      # Serialized trained model
-├── requirements.txt             # Python dependencies
-├── sync_to_hf.sh                # HF Spaces sync helper
-└── README.md                    # Project documentation
+│       ├── push-model-to-hub.yml   # CI/CD workflow for model publishing
+│       └── sync.yml                # Hugging Face sync workflow
+├── app/
+│   └── api.py                      # FastAPI endpoints and model inference
+├── tests/                          # Validation and regression tests
+├── venv/                           # Local virtual environment (ignored in deployment)
+├── .env                            # Environment variables (not committed)
+├── .gitattributes
+├── .gitignore
+├── app.py                          # Legacy Streamlit entry point
+├── dashboard.py                    # Legacy dashboard interface
+├── diabetes_app.py                 # Streamlit web application (primary UI)
+├── Diabetemodel.pkl                # Serialized trained model
+├── Dockerfile                      # Container build instructions
+├── HF_INTEGRATION_GUIDE.md         # Hugging Face integration guide
+├── HF_MODEL_CARD.md                # Hugging Face model card metadata
+├── push_to_hub.py                  # Script for pushing model to Hugging Face Hub
+├── README.md                       # Project documentation
+├── requirements.txt                # Python dependencies
+├── sync_to_hf.sh                   # HF Spaces sync helper
+├── train_model.py                  # ML pipeline and training script
+└── upload_model.py                 # Script for uploading model artifacts
 ```
+
+> **Note:** While `app.py` and `dashboard.py` remain in the repo for legacy reference, the **primary frontend is `diabetes_app.py`**. Supporting scripts (`push_to_hub.py`, `upload_model.py`) and Hugging Face documentation files (`HF_INTEGRATION_GUIDE.md`, `HF_MODEL_CARD.md`) have been added to streamline cloud deployment.
 
 ---
 
@@ -125,19 +136,13 @@ python3 -c "import joblib; print('✓ Environment ready')"
 **Run the Streamlit dashboard**
 
 ```bash
-streamlit run app.py
+streamlit run diabetes_app.py
 ```
 
 **Start the FastAPI backend**
 
 ```bash
 uvicorn app.api:app --reload --port 8000
-```
-
-**Launch the desktop UI**
-
-```bash
-python3 diabetes_app.py
 ```
 
 **Run the test suite**
@@ -169,9 +174,19 @@ bash sync_to_hf.sh
 
 ## 📌 Notes
 
-- The Streamlit app is the primary user interface and is optimized for fast inference.
+- The Streamlit app (`diabetes_app.py`) is the primary user interface and is optimized for fast inference.
 - The FastAPI backend can be used for integration with other applications or services.
-- The model is serialized as `DiabetesPipeline.joblib` and loaded at runtime.
+- The model is serialized as `Diabetesmodel.pkl` and loaded at runtime.
+- **Deployment fix:** Previously, the Hugging Face Space link failed after the developer’s laptop was put to sleep. This was due to confusion between local hosting and remote deployment. The issue has been resolved — the Space is now fully remote, independent of local machine state, and consistently available.
+
+---
+
+## 📝 Changelog
+
+- **Deployment stability (2026):** Fixed Hugging Face Space availability issue — now independent of local machine state.  
+- **UI layout (2026):** Refined Streamlit frontend to match professional recruiter-ready design (two-column inputs, clear spacing, bold probability display).  
+- **Repository cleanup (2026):** Removed legacy Tkinter prototype; clarified `diabetes_app.py` as the primary frontend; added Hugging Face integration guides and automation scripts.  
+- **Dependency alignment (2026):** Pinned scikit-learn to 1.7.x for Python 3.10 compatibility; retrained model to remove version mismatch warnings.  
 
 ---
 
@@ -182,3 +197,6 @@ Open an issue or reach out if you have questions about the implementation, archi
 ---
 
 **Built with Python, scikit-learn, and modern ML deployment practices.**
+```
+
+---
