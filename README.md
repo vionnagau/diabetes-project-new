@@ -1,4 +1,3 @@
-
 ---
 title: Diabetes Project
 emoji: 🩺
