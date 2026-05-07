@@ -10,7 +10,7 @@ app_file: diabetes_app.py
 pinned: false
 ---
 
-# 🩺 Diabetes Risk Assessment System
+# 🩺 GlycoRisk – End-to-End Machine Learning Diabetes Screening
 
 A production-ready diabetes risk assessment platform that combines machine learning, REST APIs, interactive dashboards, and cloud deployment. This repository presents a complete ML engineering workflow from data ingestion and preprocessing to model serving and public deployment.
 
